@@ -21,10 +21,10 @@ def write_to_excel(pdf_info, output_file):
     workbook = openpyxl.Workbook()
     sheet = workbook.active
     sheet.title = "PDF Info"
-    sheet.append(["Nombre del archivo", "Ruta", "Cantidad de páginas"])
+    sheet.append(["Ruta", "Nombre del archivo", "Cantidad de páginas"])
 
     for info in pdf_info:
-        sheet.append([info['name'], info['path'], info['pages']])
+        sheet.append([info['path'], info['name'], info['pages']])
     
     workbook.save(output_file)
 
@@ -47,8 +47,8 @@ def main():
         try:
             pages = count_pdf_pages(pdf_file)
             pdf_info.append({
-                'name': os.path.basename(pdf_file),
                 'path': pdf_file,
+                'name': os.path.basename(pdf_file),
                 'pages': pages
             })
         except Exception as e:
